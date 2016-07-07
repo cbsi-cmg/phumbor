@@ -46,6 +46,11 @@ class Url
 
         $signature = $secret ? self::sign($imgPath, $secret) : 'unsafe';
 
+        if (is_array($server)) {
+            $index = strlen($imgPath) % count($server);
+            $server = $server[$index];
+        }
+
         return sprintf(
             '%s/%s/%s',
             $server,
